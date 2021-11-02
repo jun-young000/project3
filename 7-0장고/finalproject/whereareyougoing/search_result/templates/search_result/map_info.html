@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>당신을 위한 10대 맛집을 추천합니다.</title>
+
+    <!-- 지도 마커 css 파일 불러오기 -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/map_style.css' %}"/>
+</head>
+
+<body>
+
+<div id="map" style="width:100%;height:350px;"></div>
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bcd1b346af0773ea936fc21184d0fa9f"></script>
+<script>
+var mapContainer = document.getElementById('map'), // 지도의 중심좌표
+    mapOption = {
+        center: new kakao.maps.LatLng(33.32141, 126.3148), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
+
+var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+// 지도를 생성한다
+var map = new kakao.maps.Map(mapContainer, mapOption);
+
+// 지도 타입 변경 컨트롤을 생성한다
+var mapTypeControl = new kakao.maps.MapTypeControl();
+
+// 지도의 상단 우측에 지도 타입 변경 컨트롤을 추가한다
+map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+
+// 지도에 확대 축소 컨트롤을 생성한다
+var zoomControl = new kakao.maps.ZoomControl();
+
+// 지도의 우측에 확대 축소 컨트롤을 추가한다
+map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+
+
+
+
+// 지도에 마커를 표시합니다
+var marker1 = new kakao.maps.Marker({
+    map: map,
+    position: new kakao.maps.LatLng(33.4471343,126.3057656)
+});
+
+var marker2 = new daum.maps.Marker({
+    map: map,
+    position: new daum.maps.LatLng(33.4659677, 126.3206294)
+});
+
+var marker3 = new daum.maps.Marker({
+    map: map,
+    position: new daum.maps.LatLng(33.4718805, 126.3681801)
+});
+
+var marker4 = new daum.maps.Marker({
+    map: map,
+    position: new daum.maps.LatLng(33.4725624, 126.4093289)
+});
+
+var marker5 = new daum.maps.Marker({
+    map: map,
+    position: new daum.maps.LatLng(33.4478775, 126.3012418)
+});
+
+var marker6 = new daum.maps.Marker({
+    map: map,
+    position: new daum.maps.LatLng(33.4659319, 126.3192857)
+});
+
+var marker7 = new daum.maps.Marker({
+    map: map,
+    position: new daum.maps.LatLng(33.4800276, 126.4012957)
+});
+
+var marker8 = new daum.maps.Marker({
+    map: map,
+    position: new daum.maps.LatLng(33.4683238, 126.3401314)
+});
+var marker9 = new daum.maps.Marker({
+    map: map,
+    position: new daum.maps.LatLng(33.4601827, 126.4339961)
+});
+var marker10 = new daum.maps.Marker({
+    map: map,
+    position: new daum.maps.LatLng(33.4487544,126.307815)
+});
+// 커스텀 오버레이에 표시할 컨텐츠 입니다
+// 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
+// 별도의 이벤트 메소드를 제공하지 않습니다
+var content1 = '<div class="wrap">' +
+            '    <div class="info">' +
+            '        <div class="title">' +
+    '            식당이름:설레임' +
+            '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
+            '        </div>' +
+            '        <div class="body">' +
+            '            <div class="img">' +
+            '                <img src=""http://cfile181.uf.daum.net/image/250649365602043421936D""  alt="" width="73" height="70">' +
+            '           </div>' +
+            '            <div class="desc">' +
+    '                <div class="ellipsis">한식</div>' +
+    '                <div class="jibun ellipsis">제주특별자치도 제주시 애월읍 일주서로 5999-1 2층 </div>' +
+    '                <div class="jibun ellipsis">평점: 4.6799881 </div>' +
+            '            </div>' +
+            '        </div>' +
+            '    </div>' +
+            '</div>';
+
+var content2 = '<div class="wrap">' +
+            '    <div class="info">' +
+            '        <div class="title">' +
+    '            식당이름:해물섬' +
+            '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
+            '        </div>' +
+            '        <div class="body">' +
+            '            <div class="img">' +
+            '                <img src=""http://cfile181.uf.daum.net/image/250649365602043421936D""  alt="" width="73" height="70">' +
+            '           </div>' +
+            '            <div class="desc">' +
+    '                <div class="ellipsis">한식</div>' +
+    '                <div class="jibun ellipsis">제주특별자치도 제주시 애월읍 애월로11길 19 1층 </div>' +
+    '                <div class="jibun ellipsis">평점: 4.558139535 </div>' +
+            '            </div>' +
+            '        </div>' +
+            '    </div>' +
+            '</div>';
+var content3 = '<div class="wrap">' +
+            '    <div class="info">' +
+            '        <div class="title">' +
+    '            식당이름:엄지흑돼지' +
+            '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
+            '        </div>' +
+            '        <div class="body">' +
+            '            <div class="img">' +
+            '                <img src=""http://cfile181.uf.daum.net/image/250649365602043421936D""  alt="" width="73" height="70">' +
+            '           </div>' +
+            '            <div class="desc">' +
+    '                <div class="ellipsis">한식</div>' +
+    '                <div class="jibun ellipsis">제주특별자치도 제주시 애월읍 일주서로 6701 1층</div>' +
+    '                <div class="jibun ellipsis">평점: 4.6328125 </div>' +
+            '            </div>' +
+            '        </div>' +
+            '    </div>' +
+            '</div>';
+var content4 = '<div class="wrap">' +
+            '    <div class="info">' +
+            '        <div class="title">' +
+    '            식당이름:비금향' +
+            '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
+            '        </div>' +
+            '        <div class="body">' +
+            '            <div class="img">' +
+            '                <img src=""http://cfile181.uf.daum.net/image/250649365602043421936D""  alt="" width="73" height="70">' +
+            '           </div>' +
+            '            <div class="desc">' +
+    '                <div class="ellipsis">기타</div>' +
+    '                <div class="jibun ellipsis">제주특별자치도 제주시 애월읍 항몽로 133 1층 </div>' +
+    '                <div class="jibun ellipsis">평점: 4.5</div>' +
+            '            </div>' +
+            '        </div>' +
+            '    </div>' +
+            '</div>';
+var content5 = '<div class="wrap">' +
+            '    <div class="info">' +
+            '        <div class="title">' +
+    '            식당이름:우미노식탁' +
+            '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
+            '        </div>' +
+            '        <div class="body">' +
+            '            <div class="img">' +
+            '                <img src=""http://cfile181.uf.daum.net/image/250649365602043421936D""  alt="" width="73" height="70">' +
+            '           </div>' +
+            '            <div class="desc">' +
+    '                <div class="ellipsis">기타</div>' +
+    '                <div class="jibun ellipsis">제주특별자치도 제주시 애월읍 금성5길 42-24 1층</div>' +
+    '                <div class="jibun ellipsis">평점: 4.57480315 </div>' +
+            '            </div>' +
+            '        </div>' +
+            '    </div>' +
+            '</div>';
+var content6 = '<div class="wrap">' +
+            '    <div class="info">' +
+            '        <div class="title">' +
+    '            식당이름:모슬포항부두식당2호점' +
+            '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
+            '        </div>' +
+            '        <div class="body">' +
+            '            <div class="img">' +
+            '                <img src=""http://cfile181.uf.daum.net/image/250649365602043421936D""  alt="" width="73" height="70">' +
+            '           </div>' +
+            '            <div class="desc">' +
+    '                <div class="ellipsis">중국식</div>' +
+    '                <div class="jibun ellipsis">제주특별자치도 제주시 애월읍 애월로 33 1층 </div>' +
+    '                <div class="jibun ellipsis">평점: 4.688461538</div>' +
+            '            </div>' +
+            '        </div>' +
+            '    </div>' +
+            '</div>';
+var content7 = '<div class="wrap">' +
+            '    <div class="info">' +
+            '        <div class="title">' +
+    '            식당이름:한양뼈감탕' +
+            '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
+            '        </div>' +
+            '        <div class="body">' +
+            '            <div class="img">' +
+            '                <img src=""http://cfile181.uf.daum.net/image/250649365602043421936D""  alt="" width="73" height="70">' +
+            '           </div>' +
+            '            <div class="desc">' +
+    '                <div class="ellipsis">한식</div>' +
+    '                <div class="jibun ellipsis">제주특별자치도 제주시 애월읍 하귀로 38</div>' +
+    '                <div class="jibun ellipsis">평점: 4.456521739 </div>' +
+            '            </div>' +
+            '        </div>' +
+            '    </div>' +
+            '</div>';
+var content8 = '<div class="wrap">' +
+            '    <div class="info">' +
+            '        <div class="title">' +
+    '            식당이름:달빛해녀촌횟집' +
+            '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
+            '        </div>' +
+            '        <div class="body">' +
+            '            <div class="img">' +
+            '                <img src=""http://cfile181.uf.daum.net/image/250649365602043421936D""  alt="" width="73" height="70">' +
+            '           </div>' +
+            '            <div class="desc">' +
+    '                <div class="ellipsis">한식</div>' +
+    '                <div class="jibun ellipsis">제주특별자치도 제주시 애월읍 애월해안로 270 </div>' +
+    '                <div class="jibun ellipsis">평점: 3.944444444 </div>' +
+            '            </div>' +
+            '        </div>' +
+            '    </div>' +
+            '</div>';
+var content9 = '<div class="wrap">' +
+            '    <div class="info">' +
+            '        <div class="title">' +
+    '            식당이름:즐거운밥상' +
+            '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
+            '        </div>' +
+            '        <div class="body">' +
+            '            <div class="img">' +
+            '                <img src=""http://cfile181.uf.daum.net/image/250649365602043421936D""  alt="" width="73" height="70">' +
+            '           </div>' +
+            '            <div class="desc">' +
+    '                <div class="ellipsis">탕류(보신용)</div>' +
+    '                <div class="jibun ellipsis">제주특별자치도 제주시 애월읍 광성로 249 1층 </div>' +
+    '                <div class="jibun ellipsis">평점: 4,33.4601827</div>' +
+            '            </div>' +
+            '        </div>' +
+            '    </div>' +
+            '</div>';
+var content10 = '<div class="wrap">' +
+            '    <div class="info">' +
+            '        <div class="title">' +
+    '            식당이름:곽지가' +
+            '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
+            '        </div>' +
+            '        <div class="body">' +
+            '            <div class="img">' +
+            '                <img src=""http://cfile181.uf.daum.net/image/250649365602043421936D""  alt="" width="73" height="70">' +
+            '           </div>' +
+            '            <div class="desc">' +
+    '                <div class="ellipsis">중국식</div>' +
+    '                <div class="jibun ellipsis">제주특별자치도 제주시 애월읍 일주서로 6025</div>' +
+    '                <div class="jibun ellipsis">평점: 4.533 </div>' +
+            '            </div>' +
+            '        </div>' +
+            '    </div>' +
+            '</div>';
+function placesSearchCB (data, status, pagination) {
+    if (status === kakao.maps.services.Status.OK) {
+        for (var i=0; i<data.length; i++) {
+            displayMarker(data[i]);
+            //TODO: 목록 표시
+            console.log(data[i].place_name); // 장소명 출력
+        }
+    }
+}
+// 마커 위에 커스텀오버레이를 표시합니다
+// 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+var overlay1 = new kakao.maps.CustomOverlay({
+    content: content1,
+    map: map,
+    position: marker1.getPosition()
+});
+
+var overlay2 = new kakao.maps.CustomOverlay({
+    content: content2,
+    map: map,
+    position: marker2.getPosition()
+});
+var overlay3 = new kakao.maps.CustomOverlay({
+    content: content3,
+    map: map,
+    position: marker3.getPosition()
+});
+var overlay4 = new kakao.maps.CustomOverlay({
+    content: content4,
+    map: map,
+    position: marker4.getPosition()
+});
+var overlay5 = new kakao.maps.CustomOverlay({
+    content: content5,
+    map: map,
+    position: marker5.getPosition()
+});
+var overlay6 = new kakao.maps.CustomOverlay({
+    content: content6,
+    map: map,
+    position: marker6.getPosition()
+});
+var overlay7 = new kakao.maps.CustomOverlay({
+    content: content7,
+    map: map,
+    position: marker7.getPosition()
+});
+var overlay8 = new kakao.maps.CustomOverlay({
+    content: content8,
+    map: map,
+    position: marker8.getPosition()
+});
+var overlay9 = new kakao.maps.CustomOverlay({
+    content: content9,
+    map: map,
+    position: marker9.getPosition()
+});
+var overlay10 = new kakao.maps.CustomOverlay({
+    content: content10,
+    map: map,
+    position: marker10.getPosition()
+});
+
+
+
+// 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+kakao.maps.event.addListener(marker1, 'click', function() {
+    overlay1.setMap(map);
+});
+
+kakao.maps.event.addListener(marker2, 'click', function() {
+    overlay2.setMap(map);
+});
+kakao.maps.event.addListener(marker3, 'click', function() {
+    overlay3.setMap(map);
+});
+kakao.maps.event.addListener(marker4, 'click', function() {
+    overlay4.setMap(map);
+});
+kakao.maps.event.addListener(marker5, 'click', function() {
+    overlay5.setMap(map);
+});
+kakao.maps.event.addListener(marker6, 'click', function() {
+    overlay6.setMap(map);
+});
+kakao.maps.event.addListener(marker7, 'click', function() {
+    overlay7.setMap(map);
+});
+kakao.maps.event.addListener(marker8, 'click', function() {
+    overlay8.setMap(map);
+});
+kakao.maps.event.addListener(marker9, 'click', function() {
+    overlay9.setMap(map);
+});
+kakao.maps.event.addListener(marker10, 'click', function() {
+    overlay10.setMap(map);
+});
+
+
+// 맵을 클릭했을 때 커스텀 오버레이를 닫습니다.
+kakao.maps.event.addListener(map, 'click', function() {
+    overlay1.setMap(null);
+});
+
+// 맵을 클릭했을 때 커스텀 오버레이를 닫습니다.
+kakao.maps.event.addListener(map, 'click', function() {
+    overlay2.setMap(null);
+});
+// 맵을 클릭했을 때 커스텀 오버레이를 닫습니다.
+kakao.maps.event.addListener(map, 'click', function() {
+    overlay3.setMap(null);
+});
+// 맵을 클릭했을 때 커스텀 오버레이를 닫습니다.
+kakao.maps.event.addListener(map, 'click', function() {
+    overlay4.setMap(null);
+});
+// 맵을 클릭했을 때 커스텀 오버레이를 닫습니다.
+kakao.maps.event.addListener(map, 'click', function() {
+    overlay5.setMap(null);
+});
+// 맵을 클릭했을 때 커스텀 오버레이를 닫습니다.
+kakao.maps.event.addListener(map, 'click', function() {
+    overlay6.setMap(null);
+});
+// 맵을 클릭했을 때 커스텀 오버레이를 닫습니다.
+kakao.maps.event.addListener(map, 'click', function() {
+    overlay7.setMap(null);
+});
+// 맵을 클릭했을 때 커스텀 오버레이를 닫습니다.
+kakao.maps.event.addListener(map, 'click', function() {
+    overlay8.setMap(null);
+});
+// 맵을 클릭했을 때 커스텀 오버레이를 닫습니다.
+kakao.maps.event.addListener(map, 'click', function() {
+    overlay9.setMap(null);
+});
+// 맵을 클릭했을 때 커스텀 오버레이를 닫습니다.
+kakao.maps.event.addListener(map, 'click', function() {
+    overlay10.setMap(null);
+});
+</script>
+
+</body>
+</html>
