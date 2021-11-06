@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/../.." vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Final_project" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/jeju_whereareyougoing" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/whereareyougoing/chucheon/templates/tripbiz" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/whereareyougoing/list관련참고template" vcs="Git" />
+  </component>
+</project>
